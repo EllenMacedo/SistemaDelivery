@@ -1,0 +1,144 @@
+🔧 1. NOVO ENUM (obrigatório)
+📦 com.ufes.delivery.model.EstadoPedido
+
+Precisa existir e ser exatamente o domínio da US04:
+
+NOVO
+AGUARDANDO_PAGAMENTO
+EM_PREPARO
+AGUARDANDO_ENTREGA
+EM_TRANSITO
+ENTREGUE
+CANCELADO (opcional, mas recomendado)
+
+👉 Sem isso você não consegue métricas nem filtro do painel.
+
+📦 2. NOVO REPOSITÓRIO DE PEDIDOS (ESSENCIAL)
+📦 pacote:
+
+com.ufes.delivery.repository
+
+📄 criar:
+
+IPedidoRepository
+
+Funções que ele deve ter:
+void adicionar(Pedido pedido)
+salva pedido
+List<Pedido> listarTodos()
+base do painel
+List<Pedido> buscarPorData(LocalDate data)
+ESSENCIAL pra US04 (tudo gira em torno da data de operação)
+Optional<Pedido> buscarPorNumero(int numeroPedido)
+usado na “visualização do pedido”
+📄 implementar:
+
+PedidoRepositoryEmMemoria
+
+Map<Integer, Pedido>
+chave = numeroPedido
+📊 3. NOVO SERVICE: PAINEL OPERACIONAL (CORE DA US04)
+📦 pacote:
+
+com.ufes.delivery.service.operacao
+
+📄 criar:
+
+PainelOperacionalService
+
+Esse é o coração da US04.
+
+🔥 responsabilidades dele:
+1. Buscar pedidos da data de operação
+List<Pedido> obterPedidosDoDia(LocalDate data)
+2. Calcular métricas (ESSENCIAL DO ENUNCIADO)
+
+Você precisa de métodos assim:
+
+long contarPedidosDoDia(List<Pedido>)
+long contarPorEstado(List<Pedido>, EstadoPedido estado)
+usado para:
+NOVO
+AGUARDANDO_PAGAMENTO
+EM_PREPARO
+AGUARDANDO_ENTREGA
+EM_TRANSITO
+ENTREGUE
+
+👉 isso cobre TODAS as métricas da US04
+
+3. Métrica específica importante
+long contarEntreguesHoje(List<Pedido>, LocalDate data)
+filtro:
+estado = ENTREGUE
+dataConclusao dentro do dia
+4. Construção da “visão do painel”
+
+(opcional, mas muito útil)
+
+PainelOperacionalDTO montarPainel(LocalDate data)
+
+👉 Esse DTO deve carregar:
+
+data operação
+métricas
+lista de pedidos
+📦 4. NOVO DTO (RECOMENDADO)
+📦 pacote:
+
+com.ufes.delivery.dto
+
+📄 criar:
+
+PainelOperacionalDTO
+
+Campos:
+
+LocalDate dataOperacao
+List<Pedido> pedidos
+long pedidosDoDia
+long novos
+long aguardandoPagamento
+long emPreparo
+long aguardandoEntrega
+long emTransito
+long entreguesHoje
+
+👉 Isso casa 100% com a US04
+
+📦 5. AJUSTE NO PEDIDO (você já começou)
+
+Você já fez quase tudo certo, só precisa garantir:
+
+✔ numeroPedido existe
+✔ estadoPedido existe
+✔ dataConclusao só existe quando ENTREGUE
+✔ estado começa como NOVO
+
+📌 6. REGRAS IMPORTANTES DA US04 (o que vai ser cobrado)
+✔ Painel sempre por data
+
+→ tudo filtra por data do pedido
+
+✔ Métricas NÃO são aleatórias
+
+→ sempre derivadas da lista de pedidos do dia
+
+✔ ENTREGUES HOJE
+
+→ usa dataConclusao, não data
+
+✔ Estado só pode ser o do enum
+
+→ sem string solta
+
+✔ Lista de pedidos
+
+→ vem do repository filtrado por data
+
+Quando voltar, manda nessa ordem:
+
+PedidoRepositoryEmMemoria
+Pedido
+EstadoPedido (se mudou)
+pergunta: “vamos fazer o PainelOperacionalService”
