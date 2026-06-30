@@ -43,49 +43,49 @@ public class LoginView extends JFrame implements ILoginView{
     }
     
      private void inicializarComponentes() {
-        JPanel pnlPrincipal = new JPanel(new GridBagLayout());
+        JPanel pnlLogin = new JPanel(new GridBagLayout());
         GridBagConstraints restricoes = new GridBagConstraints();
         
-        pnlPrincipal.setBorder(BorderFactory.createTitledBorder("Dados de Acesso"));
+        pnlLogin.setBorder(BorderFactory.createTitledBorder("Dados de Acesso"));
         
         restricoes.insets = new Insets(5, 5, 5, 5);
         restricoes.anchor = GridBagConstraints.WEST;
 
         restricoes.gridx = 0;
         restricoes.gridy = 0;
-        pnlPrincipal.add(this.lblNomeUsuario, restricoes);
+        pnlLogin.add(this.lblNomeUsuario, restricoes);
 
         restricoes.gridx = 1;
         restricoes.gridy = 0;
-        pnlPrincipal.add(this.txtNomeUsuario, restricoes);
+        pnlLogin.add(this.txtNomeUsuario, restricoes);
 
         restricoes.gridx = 0;
         restricoes.gridy = 1;
-        pnlPrincipal.add(this.lblSenha, restricoes);
+        pnlLogin.add(this.lblSenha, restricoes);
 
         restricoes.gridx = 1;
         restricoes.gridy = 1;
-        pnlPrincipal.add(this.txtSenha, restricoes);
+        pnlLogin.add(this.txtSenha, restricoes);
         
         restricoes.gridx = 0;
         restricoes.gridy = 2;
         restricoes.gridwidth = 1;
         restricoes.anchor = GridBagConstraints.CENTER;
-        pnlPrincipal.add(this.btnAcessar, restricoes);
+        pnlLogin.add(this.btnAcessar, restricoes);
 
         restricoes.gridx = 1;
         restricoes.gridy = 2;
         restricoes.gridwidth = 1;
         restricoes.anchor = GridBagConstraints.CENTER;
-        pnlPrincipal.add(this.btnCancelar, restricoes);
+        pnlLogin.add(this.btnCancelar, restricoes);
         
         restricoes.gridx = 2;
         restricoes.gridy = 2;
         restricoes.gridwidth = 1;
         restricoes.anchor = GridBagConstraints.CENTER;
-        pnlPrincipal.add(this.btnCadastrarUsuario, restricoes);
+        pnlLogin.add(this.btnCadastrarUsuario, restricoes);
 
-        add(pnlPrincipal);
+        add(pnlLogin);
      }
      
      private void configurarJanela() {
@@ -123,7 +123,7 @@ public class LoginView extends JFrame implements ILoginView{
     }
 
     @Override
-    public JFrame getJanelaPrincipal() {
+    public JFrame getJanelaLogin() {
         return this;
     }
 
