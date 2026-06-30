@@ -11,6 +11,6 @@ public interface ILoginView {
     JButton getBtnAcessar();
     JButton getBtnCancelar();
     JButton getBtnCadastrarUsuario();
-    JFrame getJanelaPrincipal();
+    JFrame getJanelaLogin();
 
 }
