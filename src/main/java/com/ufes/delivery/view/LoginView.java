@@ -20,18 +20,8 @@ public class LoginView extends JFrame implements ILoginView{
     private final JLabel lblNomeUsuario;
     private final JLabel lblSenha;
 
-    public LoginView() {
+    public LoginView(){
         this.txtNomeUsuario = new JTextField(20);
-        //para impedir o usuário de inserir um nome de usuário 
-        // com letras maiúsculas ou espaço
-        txtNomeUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyReleased(java.awt.event.KeyEvent e) {
-                String texto = txtNomeUsuario.getText();
-                texto = texto.toLowerCase().replace(" ", "");
-                txtNomeUsuario.setText(texto);
-            }
-        });
         this.txtSenha = new JPasswordField(20);
         this.btnAcessar = new JButton("Acessar");
         this.btnCancelar = new JButton("Cancelar");
@@ -42,7 +32,7 @@ public class LoginView extends JFrame implements ILoginView{
         configurarJanela();
     }
     
-     private void inicializarComponentes() {
+    private void inicializarComponentes(){
         JPanel pnlLogin = new JPanel(new GridBagLayout());
         GridBagConstraints restricoes = new GridBagConstraints();
         
@@ -88,7 +78,7 @@ public class LoginView extends JFrame implements ILoginView{
         add(pnlLogin);
      }
      
-     private void configurarJanela() {
+    private void configurarJanela() {
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
