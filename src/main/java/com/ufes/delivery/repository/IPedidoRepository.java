@@ -4,7 +4,6 @@ import com.ufes.delivery.model.Pedido;
 import java.util.Optional;
 import java.util.List;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public interface IPedidoRepository {
 
